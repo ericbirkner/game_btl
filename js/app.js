@@ -37,10 +37,8 @@ function myStopFunction() {
 
   
 document.addEventListener('keyup', function (event) {
-	if (event.defaultPrevented) {
-		return;
-	}
-
+	
+	event.preventDefault();
 	var key = event.key || event.keyCode;
 
 	//console.log(event);

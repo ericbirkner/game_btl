@@ -16,11 +16,11 @@ setTimeout(function(){
 			fin = true;
 			//detengo los cronometros
 			clearInterval(downloadTimer);
-		}		
+		}
 		},1000);
-	
-	
-}, 
+
+
+},
 3000);
 
 function myTimer() {
@@ -35,24 +35,56 @@ function myStopFunction() {
     clearInterval(timer);
 }
 
-  
+
 document.addEventListener('keyup', function (event) {
-	
+
 	event.preventDefault();
 	var key = event.key || event.keyCode;
 
 	//console.log(event);
 
 	if (event.keyCode == 32) {
-		
+
 		if(alto_barra < 100){
 			if(!fin){
 				alto_barra++;
 				document.getElementById('medidor').style.height = alto_barra+'%';
-			}	
+			}
 		} else {
 			fin = true;
 			clearInterval(downloadTimer);
 		}
 	}
 });
+
+var mapping = ["A","B","X","Y","LB","RB","LT","RT","BACK","START","LS","RS","D-UP","D-DOWN","D-LEFT","D-RIGHT"];
+
+function runAnimation()
+{
+    window.requestAnimationFrame(runAnimation);
+
+    var gamepads = navigator.getGamepads();
+
+    for (var i = 0; i < gamepads.length; ++i)
+    {
+        var pad = gamepads[i];
+        if (pad){
+
+          if(pad.buttons[0].pressed){
+						if(alto_barra < 100){
+							if(!fin){
+								console.log(alto_barra);
+								alto_barra = alto_barra + 0.3;
+								document.getElementById('medidor').style.height = alto_barra+'%';
+							}
+						} else {
+							fin = true;
+							clearInterval(downloadTimer);
+						}
+					}
+        }
+            // todo; simple demo of displaying pad.axes and pad.buttons
+    }
+}
+
+window.requestAnimationFrame(runAnimation);

@@ -8,6 +8,7 @@ var timeleft = 30;
 
 //empieza todo despues de 3 segundos
 setTimeout(function(){
+		$('#intro').addClass('fadeOutDown');
 		downloadTimer = setInterval(function(){
 		timeleft--;
 		document.getElementById("countdowntimer").textContent = timeleft;

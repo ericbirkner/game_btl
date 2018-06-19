@@ -1,7 +1,6 @@
-// JavaScript Document
+// Eric Birkner JavaScript Document
 var fin = false;
 var alto_barra = 0;
-
 var timer;
 var downloadTimer;
 var timeleft = 30;
@@ -49,7 +48,8 @@ document.addEventListener('keyup', function (event) {
 		if(alto_barra < 100){
 			if(!fin){
 				alto_barra++;
-				document.getElementById('medidor').style.height = alto_barra+'%';
+				set_alto(alto_barra);
+				oculta_video(alto_barra);
 			}
 		} else {
 			fin = true;
@@ -75,8 +75,9 @@ function runAnimation()
 						if(alto_barra < 100){
 							if(!fin){
 								console.log(alto_barra);
-								alto_barra = alto_barra + 0.3;
-								document.getElementById('medidor').style.height = alto_barra+'%';
+								alto_barra = alto_barra + 0.3;								
+								set_alto(alto_barra);
+								oculta_video(alto_barra);
 							}
 						} else {
 							fin = true;
@@ -86,6 +87,36 @@ function runAnimation()
         }
             // todo; simple demo of displaying pad.axes and pad.buttons
     }
+}
+
+function oculta_video(valor){
+	if(valor>=20){
+		$('.video.uno').addClass('fadeOut animated');
+		
+	}
+	if(valor>=40){
+		$('.video.dos').addClass('fadeOut animated');
+		
+	}
+	if(valor>=60){
+		$('.video.tres').addClass('fadeOut animated');
+		
+	}
+	
+	if(valor>=80){
+		$('.video.cuatro').addClass('fadeOut animated');
+		
+	}
+}
+
+function set_alto(valor){
+	var alto = 507 * valor;
+	var porcentaje = alto/100;
+	console.log("porcentaje: "+porcentaje);
+	if(porcentaje<=507){
+		document.getElementById('medidor').style.height = porcentaje+'px';
+	}
+	
 }
 
 window.requestAnimationFrame(runAnimation);

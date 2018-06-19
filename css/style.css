@@ -64,18 +64,29 @@ body{
 
 #wrapper .barra .cont_medidor .medidor{
 	position: absolute;
-    height: 507px;
+    height: 0px;
+	max-height: 507px;
+	/*height:507px;*/
     bottom: 61px;
     left: 52px;
-    width: 29px;
+    width: 31px;
 	background: #ed1c24;
 	-webkit-border-top-left-radius: 50px;
 	-webkit-border-top-right-radius: 50px;
 	-moz-border-radius-topleft: 50px;
 	-moz-border-radius-topright: 50px;
 	border-top-left-radius: 50px;
-	border-top-right-radius: 50px;
-		
+	border-top-right-radius: 50px;				
+}
+
+#wrapper .barra .cont_medidor .circulo{
+	position: absolute;
+    bottom: 18px;
+    left: 44px;
+    width: 47px;
+    height: 50px;
+	background: #ed1c24;
+	border-radius: 50px;
 }
 
 #wrapper #countdowntimer{
@@ -101,5 +112,20 @@ body{
 	position: absolute;
 	left: 0;
 	bottom: 0;
+}
+#wrapper .video.uno{
+	z-index: 5;
+}
+#wrapper .video.dos{
+	z-index: 4;
+}
+#wrapper .video.tres{
+	z-index: 3;
+}
+#wrapper .video.cuatro{
+	z-index: 2;
+}
+#wrapper .video.cinco{
 	z-index: 1;
 }
+	

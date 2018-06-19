@@ -79,8 +79,7 @@ function runAnimation()
 								oculta_video(alto_barra);
 							}
 						} else {
-							fin = true;
-							clearInterval(downloadTimer);
+							final();
 						}
 					}
         }

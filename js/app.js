@@ -52,8 +52,7 @@ document.addEventListener('keyup', function (event) {
 				oculta_video(alto_barra);
 			}
 		} else {
-			fin = true;
-			clearInterval(downloadTimer);
+			final();
 		}
 	}
 });
@@ -117,6 +116,14 @@ function set_alto(valor){
 		document.getElementById('medidor').style.height = porcentaje+'px';
 	}
 	
+}
+
+function final(){
+	fin = true;
+	clearInterval(downloadTimer);
+	$('#ganador').addClass('fadeIn animated').css({display:'block'});
+	$('.logo').addClass('final fadeInUp');
+	$('.felicidades').addClass('bounceInDown animated').css({display:'block'});
 }
 
 window.requestAnimationFrame(runAnimation);

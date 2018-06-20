@@ -4,23 +4,33 @@ var alto_barra = 0;
 var timer;
 var downloadTimer;
 var timeleft = 30;
+var empezo = false;
 
 //empieza todo despues de 3 segundos
-setTimeout(function(){
-		$('#intro').addClass('fadeOutDown');
-		downloadTimer = setInterval(function(){
-		timeleft--;
-		document.getElementById("countdowntimer").textContent = timeleft;
-		myTimer();
-		if(timeleft <= 0){
-			//se acabó el tiempo
-			final();
-		}
-		},1000);
+
+function inicio(){
+	if(!empezo){
+		empezo = true;
+		setTimeout(function(){
+				$('#intro').addClass('fadeOutDown');
+				downloadTimer = setInterval(function(){
+				timeleft--;
+				document.getElementById("countdowntimer").textContent = timeleft;
+				myTimer();
+				if(timeleft <= 0){
+					//se acabó el tiempo
+					final();
+				}
+				},1000);
 
 
-},
-3000);
+		},
+		2000);
+	}else{
+		return false;	
+	}	
+}
+
 
 function myTimer() {
 	if(alto_barra>0){

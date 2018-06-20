@@ -13,9 +13,8 @@ setTimeout(function(){
 		document.getElementById("countdowntimer").textContent = timeleft;
 		myTimer();
 		if(timeleft <= 0){
-			fin = true;
-			//detengo los cronometros
-			clearInterval(downloadTimer);
+			//se acabó el tiempo
+			final();
 		}
 		},1000);
 
@@ -122,7 +121,12 @@ function final(){
 	clearInterval(downloadTimer);
 	$('#ganador').addClass('fadeIn animated').css({display:'block'});
 	$('.logo').addClass('final fadeInUp');
-	$('.felicidades').addClass('bounceInDown animated').css({display:'block'});
+	
+	if(alto_barra>=100){
+		$('.mensaje').attr('src','images/winner.png');
+	}
+	
+	$('.mensaje').addClass('bounceInDown animated').css({display:'block'});
 }
 
 window.requestAnimationFrame(runAnimation);

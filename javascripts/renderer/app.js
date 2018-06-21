@@ -5,27 +5,30 @@ var timer;
 var downloadTimer;
 var timeleft = 30;
 var empezo = false;
+var cuenta = false;
 
 //empieza todo despues de 3 segundos
 
 function inicio(){
+	
 	if(!empezo){
+	    console.log('inicio el juego');
 		empezo = true;
 		setTimeout(function(){
-				$('#intro').addClass('fadeOutDown');
-				downloadTimer = setInterval(function(){
-				timeleft--;
-				document.getElementById("countdowntimer").textContent = timeleft;
-				myTimer();
-				if(timeleft <= 0){
-					//se acabó el tiempo
-					final();
-				}
-				},1000);
-
-
+			cuenta = true;
+			$('#intro').addClass('fadeOutDown');
+			downloadTimer = setInterval(function(){
+			timeleft--;
+			document.getElementById("countdowntimer").textContent = timeleft;
+			myTimer();
+			if(timeleft <= 0){
+				//se acabó el tiempo
+				final();
+			}
+			},1000);			
 		},
-		2000);
+		2500);
+		return;
 	}else{
 		return false;	
 	}	
@@ -53,23 +56,27 @@ document.addEventListener('keyup', function (event) {
 	//console.log(event);
 
 	if (event.keyCode == 32) {
-
-		if(alto_barra < 100){
-			if(!fin){
-				alto_barra++;
-				set_alto(alto_barra);
-				oculta_video(alto_barra);
+		if(empezo){
+			if(alto_barra < 100){
+				if((!fin)&&(cuenta===true)){
+					alto_barra++;
+					set_alto(alto_barra);
+					oculta_video(alto_barra);
+				}
+			} else {
+				final();
 			}
-		} else {
-			final();
-		}
+		}else{
+		  inicio();
+	    }
 	}
+	
+	return !(event.keyCode == 32 && event.target == document.body);
 });
 
-var mapping = ["A","B","X","Y","LB","RB","LT","RT","BACK","START","LS","RS","D-UP","D-DOWN","D-LEFT","D-RIGHT"];
+//var mapping = ["A","B","X","Y","LB","RB","LT","RT","BACK","START","LS","RS","D-UP","D-DOWN","D-LEFT","D-RIGHT"];
 
-function runAnimation()
-{
+function runAnimation(){
     window.requestAnimationFrame(runAnimation);
 
     var gamepads = navigator.getGamepads();
@@ -80,8 +87,9 @@ function runAnimation()
         if (pad){
 
           if(pad.buttons[0].pressed){
+			  if(empezo){
 						if(alto_barra < 100){
-							if(!fin){
+							if((!fin)&&(cuenta===true)){
 								console.log(alto_barra);
 								alto_barra = alto_barra + 0.3;								
 								set_alto(alto_barra);
@@ -91,6 +99,9 @@ function runAnimation()
 							final();
 						}
 					}
+			  }else{
+				  inicio();
+			  }
         }
             // todo; simple demo of displaying pad.axes and pad.buttons
     }
@@ -137,6 +148,11 @@ function final(){
 	}
 	
 	$('.mensaje').addClass('bounceInDown animated').css({display:'block'});
+	
+	setTimeout(function(){
+		location.reload();		
+
+	},5000);
 }
 
 window.requestAnimationFrame(runAnimation);

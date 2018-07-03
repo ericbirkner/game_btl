@@ -9,6 +9,7 @@
 <body id="myApp">
 <div id="wrapper">
 	<div class="relative">
+	  <div id="setup"><img src="images/setup.png" alt=""/></div>	
 	  <div id="intro" class="animated"></div>
 	  <img src="images/logo_juego.png" class="logo zoomInUp animated" alt="" onClick="inicio();"/>
 	  <div id="countdowntimer">30</div>
@@ -18,14 +19,14 @@
 		  <div class="medidor" id="medidor"></div>
 		</div>
 	  </div>
-	  <video class="video uno" src="videos/barril_1.mp4" autoplay loop preload="true" muted></video>
-	  <video class="video dos" src="videos/barril_2.mp4" autoplay loop preload="true" muted></video>
-	  <video class="video tres" src="videos/barril_3.mp4" autoplay loop preload="true" muted></video>
-	  <video class="video cuatro" src="videos/barril_4.mp4" autoplay loop preload="true" muted></video>
-	  <video class="video cinco" src="videos/barril_5.mp4" autoplay loop preload="true" muted></video>
+	  <video class="video uno animated" src="videos/barril_1.mp4" autoplay loop preload="true" muted></video>
+	  <video class="video dos animated" src="videos/barril_2.mp4" autoplay loop preload="true" muted></video>
+	  <video class="video tres animated" src="videos/barril_3.mp4" autoplay loop preload="true" muted></video>
+	  <video class="video cuatro animated" src="videos/barril_4.mp4" autoplay loop preload="true" muted></video>
+	  <video class="video cinco animated" src="videos/barril_5.mp4" autoplay loop preload="true" muted></video>
 
 	  <div id="ganador"></div>
-	  <img src="images/looser.png" class="mensaje" alt="" onClick="location.reload();" />
+	  <img src="images/looser.png" class="mensaje  animated" alt="" onClick="location.reload();" />
    </div>
 </div>
 <script src="javascripts/renderer/jquery-3.3.1.min.js" onload="window.$ = window.jQuery = module.exports;"></script>

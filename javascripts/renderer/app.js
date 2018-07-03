@@ -6,6 +6,7 @@ var downloadTimer;
 var timeleft = 30;
 var empezo = false;
 var cuenta = false;
+var dificultad = 0.25;
 
 //empieza todo despues de 3 segundos
 
@@ -16,7 +17,7 @@ function inicio(){
 		empezo = true;
 		setTimeout(function(){
 			cuenta = true;
-			$('#intro').addClass('fadeOutDown');
+			$('#intro').fadeOut('slow');
 			downloadTimer = setInterval(function(){
 			timeleft--;
 			document.getElementById("countdowntimer").textContent = timeleft;
@@ -37,7 +38,7 @@ function inicio(){
 
 function myTimer() {
 	if(alto_barra>0){
-		alto_barra = alto_barra-2;
+		alto_barra = alto_barra-1;
 		console.log(alto_barra);
 		document.getElementById('medidor').style.height = alto_barra+'%';
 	}
@@ -49,7 +50,6 @@ function myStopFunction() {
 
 
 document.addEventListener('keyup', function (event) {
-
 	event.preventDefault();
 	var key = event.key || event.keyCode;
 
@@ -67,6 +67,7 @@ document.addEventListener('keyup', function (event) {
 				final();
 			}
 		}else{
+			console.log('teclado ql');
 		  inicio();
 	    }
 	}
@@ -87,11 +88,14 @@ function runAnimation(){
         if (pad){
 
           if(pad.buttons[0].pressed){
+			  console.log('fuelle ql');
+		  	  inicio();
+
 			  if(empezo){
 						if(alto_barra < 100){
 							if((!fin)&&(cuenta===true)){
 								console.log(alto_barra);
-								alto_barra = alto_barra + 0.3;								
+								alto_barra = alto_barra + dificultad;								
 								set_alto(alto_barra);
 								oculta_video(alto_barra);
 							}
@@ -99,8 +103,6 @@ function runAnimation(){
 							final();
 						}
 					}
-			  }else{
-				  inicio();
 			  }
         }
             // todo; simple demo of displaying pad.axes and pad.buttons
@@ -109,20 +111,20 @@ function runAnimation(){
 
 function oculta_video(valor){
 	if(valor>=20){
-		$('.video.uno').addClass('fadeOut animated');
+		$('.video.uno').addClass('fadeOut');
 		
 	}
 	if(valor>=40){
-		$('.video.dos').addClass('fadeOut animated');
+		$('.video.dos').addClass('fadeOut');
 		
 	}
 	if(valor>=60){
-		$('.video.tres').addClass('fadeOut animated');
+		$('.video.tres').addClass('fadeOut');
 		
 	}
 	
 	if(valor>=80){
-		$('.video.cuatro').addClass('fadeOut animated');
+		$('.video.cuatro').addClass('fadeOut');
 		
 	}
 }
@@ -140,17 +142,41 @@ function set_alto(valor){
 function final(){
 	fin = true;
 	clearInterval(downloadTimer);
-	$('#ganador').addClass('fadeIn animated').css({display:'block'});
-	$('.logo').addClass('final fadeInUp');
+	$('#ganador').fadeIn('slow');
+	$('.logo').addClass('final');
 	
 	if(alto_barra>=100){
 		$('.mensaje').attr('src','images/winner.png');
+	}else{
+		$('.mensaje').attr('src','images/looser.png');
 	}
 	
-	$('.mensaje').addClass('bounceInDown animated').css({display:'block'});
+	$('.mensaje').fadeIn('slow');
 	
 	setTimeout(function(){
-		location.reload();		
+		//location.reload();		
+		//location.href="index.html";
+
+		fin = false;
+		alto_barra = 0;
+		timer;
+		downloadTimer;
+		timeleft = 30;
+		empezo = false;
+		cuenta = false;
+		dificultad = 0.45;
+
+		$('#ganador').fadeOut('slow');
+		$('.logo').removeClass('final');
+		$('.mensaje').fadeOut('slow');
+		$('#intro').fadeIn('slow');
+
+		$('.video.uno').removeClass('fadeOut');
+		$('.video.dos').removeClass('fadeOut');
+		$('.video.tres').removeClass('fadeOut');
+		$('.video.cuatro').removeClass('fadeOut');
+
+		document.getElementById("countdowntimer").textContent = timeleft;
 
 	},5000);
 }

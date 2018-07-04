@@ -172,8 +172,8 @@ function final(){
 
 		fin = false;
 		alto_barra = 0;
-		timer;
-		downloadTimer;
+		timer = null;
+		downloadTimer = null;
 		timeleft = 30;
 		empezo = false;
 		cuenta = false;

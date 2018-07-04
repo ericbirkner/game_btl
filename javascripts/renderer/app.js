@@ -8,7 +8,15 @@ var empezo = false;
 var cuenta = false;
 var dificultad = 0.25;
 
-//empieza todo despues de 3 segundos
+$(document).ready(function(){
+	$('#panel input[type=range]').val(dificultad);
+	$('#setup').on('click',function(){
+		$('#panel').fadeToggle('fast');
+	});
+	$('#panel button').on('click',function(){
+		$('#panel').fadeToggle('fast');
+	});
+});
 
 function inicio(){
 	
@@ -129,6 +137,11 @@ function oculta_video(valor){
 	}
 }
 
+function set_dificultad(valor){
+	dificultad = parseFloat(valor);
+	console.log(valor);
+}
+
 function set_alto(valor){
 	var alto = 507 * valor;
 	var porcentaje = alto/100;
@@ -143,7 +156,7 @@ function final(){
 	fin = true;
 	clearInterval(downloadTimer);
 	$('#ganador').fadeIn('slow');
-	$('.logo').addClass('final');
+	$('.logo').addClass('final').removeClass('zoomInUp');
 	
 	if(alto_barra>=100){
 		$('.mensaje').attr('src','images/winner.png');
@@ -164,10 +177,9 @@ function final(){
 		timeleft = 30;
 		empezo = false;
 		cuenta = false;
-		dificultad = 0.45;
 
 		$('#ganador').fadeOut('slow');
-		$('.logo').removeClass('final');
+		$('.logo').removeClass('final').addClass('zoomInUp');
 		$('.mensaje').fadeOut('slow');
 		$('#intro').fadeIn('slow');
 
@@ -175,7 +187,7 @@ function final(){
 		$('.video.dos').removeClass('fadeOut');
 		$('.video.tres').removeClass('fadeOut');
 		$('.video.cuatro').removeClass('fadeOut');
-
+		document.getElementById('medidor').style.height = '0px';
 		document.getElementById("countdowntimer").textContent = timeleft;
 
 	},5000);
